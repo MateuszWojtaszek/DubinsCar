@@ -5,7 +5,7 @@
 #ifndef DUBBINS_CAR_VECTOR2D_H
 #define DUBBINS_CAR_VECTOR2D_H
 #include <iostream>
-#include <math.h>
+#include <cmath>
 //class that models vectors and operations on them
 class Vector2d {
 // ordinary positions on the Cartesian plane
@@ -48,7 +48,7 @@ friend float operator*(const Vector2d &v1, const Vector2d &v2);
 explicit Vector2d(float x,float y);
 
 //length of vector - nodiscard cuz we need to be sure that we got a value and we are using it
-[[nodiscard]] float getLength() const;
+[[nodiscard]] double getLength() const;
 
 //simple getters
 [[nodiscard]] float getXpose() const;
