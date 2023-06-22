@@ -2,7 +2,7 @@
 // Created by mateusz on 09.06.23.
 //
 
-#include "Sector.h"
+#include "../heders/Sector.h"
 
 double Sector::getSector_length() {
     return length;
@@ -29,8 +29,8 @@ double Sector::getDistance_between_pos() {
 
 double Sector::getDistance_between_pos(const Pose &p1, const Pose &p2) {
     double tmp_distance;
-    double tmpX_squared =pow(static_cast<double>(p1.getXpose() - p2.getXpose()), 2);
-    double tmpY_squared = pow(static_cast<double>(p1.getYpose() - p2.getYpose()), 2);
+    double tmpX_squared =pow(p1.getXpose() - p2.getXpose(), 2);
+    double tmpY_squared = pow(p1.getYpose() - p2.getYpose(), 2);
     tmp_distance = sqrt(tmpX_squared+tmpY_squared);
     return tmp_distance;
 }

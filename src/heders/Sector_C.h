@@ -29,9 +29,15 @@ class Sector_C: public Sector{
 
 public:
     Sector_C(const Pose &p1, const Pose &p2,TWIST T);
-    void move1();
+    /**
+     * a function thats moves a robot
+     * @param partOF_computeLength
+     */
+    void move1(double partOF_computeLength);
     Pose getPose_after();
+    void setSector_Sampled_route();
     std::vector<Pose> getSector_Sampled_route() override;
+    double getComputedLenght();
 
 };
 

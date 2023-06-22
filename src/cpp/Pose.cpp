@@ -2,9 +2,9 @@
 // Created by mateusz on 09.06.23.
 //
 
-#include "Pose.h"
+#include "../heders/Pose.h"
 
-Pose::Pose(float x, float y, double a) : Vector2d(x, y), alfa(a),theta(0) {
+Pose::Pose(double x, double y, double a) : Vector2d(x, y), alfa(a),theta(0) {
     //changing angle to radians
     adjust_alfa();
     theta=M_PI*alfa/180;
