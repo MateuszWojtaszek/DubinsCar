@@ -39,7 +39,7 @@ void PathPlanner::planPath_LSL() {
     double lengthOF_firstL;
     double diffOfCos = difference_ofCosines(finalPose.getTheta(), initPose.getTheta());
     double diffOfSin = difference_ofSines(initPose.getTheta(), finalPose.getTheta());
-    double arctan = mod2pi(atan2(diffOfCos, distance + diffOfSin));
+    double arctan = mod2pi(std::atan2(diffOfCos, distance + diffOfSin));
     lengthOF_firstL = -initPose.getTheta() + arctan;
 
 /**

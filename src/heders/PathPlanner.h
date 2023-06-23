@@ -28,8 +28,8 @@ class PathPlanner {
     std::map<PATH,LenOfEachPart> partsOfEachPath={};
     /**
      ** a function that add a pair to a map
-     * @param p
-     * @param lep
+     * @param p - path
+     * @param lep - lenght of each part
      */
     void addTo_partsOfEeachPath(const PATH &p, const LenOfEachPart &lep);
 
@@ -64,9 +64,14 @@ public:
      * @param p_fin - final Pose
      */
     PathPlanner(const Pose &p_in, const Pose &p_fin);
-
+    /**
+     * a funtion that plan paths
+     */
     void planPaths();
-
+    /**
+     * simple getter for best path
+     * @return bestPath
+     */
     [[nodiscard]] PATH getBestPath() const;
 
     std::vector<double> getLengthOf_EachPart();

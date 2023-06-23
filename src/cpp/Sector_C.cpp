@@ -24,7 +24,7 @@ void Sector_C::setSampled_route() {
     for (double particle = 0.001; particle < length;) {
         move(particle);
         sampled_route.push_back(tmpPoseB);
-        particle+= 0.001;
+        particle+= 0.01;
     }
 }
 

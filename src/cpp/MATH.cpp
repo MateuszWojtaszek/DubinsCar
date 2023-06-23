@@ -4,7 +4,9 @@
 #include "../heders/MATH.h"
 
 double mod2pi(const double &val) {
-    return fmod(val, 2 * M_PI);
+    double tmp_val = std::fmod(val, 2 * M_PI);
+    if(tmp_val<0) tmp_val+=2*M_PI;
+    return tmp_val;
 }
 
 double difference_ofCosines(const double &angle1, const double &angle2) {
