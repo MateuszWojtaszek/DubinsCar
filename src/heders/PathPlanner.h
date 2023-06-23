@@ -5,36 +5,41 @@
 #ifndef DUBBINS_CAR_PATHPLANNER_H
 #define DUBBINS_CAR_PATHPLANNER_H
 
-#include "Sector_S.h"
-#include "Sector_C.h"
+
+#include "Pose.h"
 #include <map>
 #include "../heders/MATH.h"
+#include "Enums.h"
+#include <vector>
 
-enum PATH {
-    RSR,
-    RSL,
-    LSR,
-    LSL,
-    RLR,
-    LRL,
-    NONE
-};
 
 
 class PathPlanner {
     PATH bestPath = NONE;
 /**
- * a distance between init Pose and final Pose
+ ** a distance between init Pose and final Pose
  */
-    double distance;
+    double distance=0;
     Pose initPose;
     Pose finalPose;
+    /**
+     ** map containing the length of each part for each path
+     */
+    std::map<PATH,LenOfEachPart> partsOfEachPath={};
+    /**
+     ** a function that add a pair to a map
+     * @param p
+     * @param lep
+     */
+    void addTo_partsOfEeachPath(const PATH &p, const LenOfEachPart &lep);
+
+    std::vector<double> lengthOf_eachPart={};
 /**
  * a map for each path with it's length
  */
-    std::map<double, PATH> Paths;
+    std::map<double, PATH> Paths={};
 
-    void addTO_Paths(const PATH &p, const double &d);
+    void addTO_Paths(const double &d,const PATH &p);
 
     void planPath_LSL();
 
@@ -48,7 +53,7 @@ class PathPlanner {
 
     void planPath_LRL();
     /**
-     * a function that iterates a map Paths and set a variable bestPath
+     ** a function that iterates a map Paths and set a variable bestPath
      */
     void setBestPath();
 
@@ -63,6 +68,8 @@ public:
     void planPaths();
 
     [[nodiscard]] PATH getBestPath() const;
+
+    std::vector<double> getLengthOf_EachPart();
 
 };
 

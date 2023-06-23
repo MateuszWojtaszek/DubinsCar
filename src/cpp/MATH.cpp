@@ -19,6 +19,11 @@ double cosine_OfAngleDifference(const double &angle1, const double &angle2) {
     return tmp_cos;
 }
 
+double cosine_OfAngleSum(const double &angle1, const double &angle2) {
+    double tmp_cos = cos(angle1 + angle2);
+    return tmp_cos;
+}
+
 double getDistance_between_pos(const Pose &p1, const Pose &p2) {
     double tmp_distance;
     double tmpX_squared = pow(p1.getXpose() - p2.getXpose(), 2);
@@ -36,6 +41,11 @@ double difference_ofSines(const double &angle1, const double &angle2) {
 
 double sine_OfAngleDifference(const double &angle1, const double &angle2) {
     double tmp_sin = sin(angle1 - angle2);
+    return tmp_sin;
+}
+
+double sine_OfAngleSum(const double &angle1, const double &angle2) {
+    double tmp_sin = sin(angle1 + angle2);
     return tmp_sin;
 }
 

@@ -32,6 +32,6 @@ endif(DOXYGEN_FOUND)
 include(src/cpp_warnings.cmake)
 
 add_executable(Dubbins_Car src/cpp/main.cpp src/cpp/Vector2d.cpp src/heders/Vector2d.h src/cpp/Pose.cpp src/heders/Pose.h src/cpp/Sector.cpp src/heders/Sector.h src/cpp/PathPlanner.cpp
-        src/heders/PathPlanner.h src/cpp/Car.cpp src/heders/Car.h src/cpp/Sector_C.cpp src/heders/Sector_C.h src/cpp/Sector_S.cpp src/heders/Sector_S.h src/heders/MATH.h src/cpp/MATH.cpp)
+        src/heders/PathPlanner.h src/cpp/Car.cpp src/heders/Car.h src/cpp/Sector_C.cpp src/heders/Sector_C.h src/cpp/Sector_S.cpp src/heders/Sector_S.h src/heders/MATH.h src/cpp/MATH.cpp src/heders/Enums.h)
 
 target_compile_options(Dubbins_Car PRIVATE ${PROJECT_WARNING_FLAGS})

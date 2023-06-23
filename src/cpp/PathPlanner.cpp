@@ -5,8 +5,8 @@
 #include "../heders/PathPlanner.h"
 
 /**
- *
- * @return
+ ** a function that return bestPath
+ * @return bestPath
  */
 PATH PathPlanner::getBestPath() const {
     return bestPath;
@@ -19,6 +19,7 @@ PATH PathPlanner::getBestPath() const {
  */
 PathPlanner::PathPlanner(const Pose &p_in, const Pose &p_fin) : initPose(p_in), finalPose(p_fin) {
     distance = getDistance_between_pos(initPose, finalPose);
+    lengthOf_eachPart.resize(3);
 }
 
 void PathPlanner::planPaths() {
@@ -54,9 +55,11 @@ void PathPlanner::planPath_LSL() {
     double lengthOF_SecondL;
     lengthOF_SecondL = finalPose.getTheta() - arctan;
 //* * length of Path
-    double lengthOF_Path = lengthOF_firstL + lengthOF_S + lengthOF_SecondL;
+    double lengthOF_Path = -initPose.getTheta()+finalPose.getTheta()+lengthOF_S;
 //* *  Add length of specific path to the map
-    addTO_Paths(LSL, lengthOF_Path);
+    addTO_Paths(lengthOF_Path,LSL);
+    LenOfEachPart LofEP={lengthOF_firstL,lengthOF_S,lengthOF_SecondL};
+    addTo_partsOfEeachPath(LSL,LofEP);
 }
 
 void PathPlanner::planPath_RSR() {
@@ -79,16 +82,26 @@ void PathPlanner::planPath_LRL() {
 
 }
 
-void PathPlanner::addTO_Paths(const PATH &p, const double &d) {
+void PathPlanner::addTO_Paths (const double &d,const PATH &p) {
     Paths[d] = p;
 }
 
 void PathPlanner::setBestPath() {
     double tmp_best=0;
     for (auto path:Paths) {
-        if(tmp_best>path.first || tmp_best==0) tmp_best = path.second;
+        if(tmp_best>path.first || tmp_best==0) tmp_best = path.first;
     }
     //? looking for pointer to best path
     auto path = Paths.find(tmp_best);
     bestPath=path->second;
+    auto part = partsOfEachPath.find(bestPath);
+    lengthOf_eachPart={part->second.l1,part->second.l2,part->second.l3};
+}
+
+void PathPlanner::addTo_partsOfEeachPath(const PATH &p, const LenOfEachPart &lep) {
+    partsOfEachPath[p]=lep;
+}
+
+std::vector<double> PathPlanner::getLengthOf_EachPart() {
+    return lengthOf_eachPart;
 }
