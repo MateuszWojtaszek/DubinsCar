@@ -6,6 +6,7 @@
 double mod2pi(const double &val) {
     double tmp_val = std::fmod(val, 2 * M_PI);
     if(tmp_val<0) tmp_val+=2*M_PI;
+    if(tmp_val>360) tmp_val-=2*M_PI;
     return tmp_val;
 }
 

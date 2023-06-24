@@ -25,9 +25,9 @@ enum PART {
 class Sector {
     Pose initial_pos, final_pos;
 protected:
-    std::vector<Pose> sampled_route = {};
     Pose tmpPoseA = {0, 0, 0};
     Pose tmpPoseB = {0, 0, 0};
+    std::vector<Pose> sampled_route = {};
 public:
     virtual ~Sector() = default;
 

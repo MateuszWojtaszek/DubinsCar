@@ -21,7 +21,7 @@ void Sector_C::move(double fragment) {
 }
 
 void Sector_C::setSampled_route() {
-    for (double particle = 0.001; particle < length;) {
+    for (double particle = 0.01; particle < length;) {
         move(particle);
         sampled_route.push_back(tmpPoseB);
         particle+= 0.01;
@@ -29,5 +29,11 @@ void Sector_C::setSampled_route() {
 }
 
 Pose Sector_C::getPoseAfter() {
-    return tmpPoseB;
+    double tmp_sin = sine_OfAngleSum(tmpPoseA.getTheta(), length);
+    double tmp_cos = cosine_OfAngleSum(tmpPoseA.getTheta(), length);
+    double tmp_x = tmpPoseA.getXpose() + tmp_sin - sin(tmpPoseA.getTheta());
+    double tmp_y = tmpPoseA.getYpose() - tmp_cos + cos(tmpPoseA.getTheta());
+    double tmp_theta = tmpPoseA.getTheta() + length;
+    tmpPoseC={tmp_x,tmp_y,tmp_theta};
+    return tmpPoseC;
 }

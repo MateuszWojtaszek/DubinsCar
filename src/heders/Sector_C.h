@@ -10,6 +10,7 @@
 class Sector_C: public Sector{
     PATH path = NONE;
     PART part = NOPE;
+    Pose tmpPoseC={0,0,0};
     double length = 0;
 void move(double fragment);
 
