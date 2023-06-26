@@ -28,6 +28,9 @@ protected:
     Pose tmpPoseA = {0, 0, 0};
     Pose tmpPoseB = {0, 0, 0};
     std::vector<Pose> sampled_route = {};
+    virtual void move(double fragment)= 0;
+    Pose tmpPoseC={0,0,0};
+    PATH path = NONE;
 public:
     virtual ~Sector() = default;
 
@@ -36,13 +39,15 @@ public:
      * @param p1
      * @param p2
      */
-    Sector(const Pose &p1, const Pose &p2);
+    Sector(const Pose &p1, const Pose &p2, const PATH &p);
 
-    std::vector<Pose> getSector_Sampled_route();
+    [[nodiscard]] virtual std::vector<Pose> getSector_Sampled_route() const;
 
     [[nodiscard]] Pose getInitialPose() const;
 
     [[nodiscard]] Pose getFinalPose() const;
+    virtual void setSampled_route()=0;
+    virtual Pose getPoseAfter()=0;
 };
 
 

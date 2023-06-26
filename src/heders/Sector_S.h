@@ -7,11 +7,8 @@
 #include "Sector.h"
 //derivative of class sector from straight line
 class Sector_S: public Sector{
-    PATH path = NONE;
-    PART part = NOPE;
     double length = 0;
-    void move(double fragment);
-    Pose tmpPoseC={0,0,0};
+    void move(double fragment) override;
 public:
     /**
      *
@@ -21,11 +18,10 @@ public:
      * @param par
      * @param l
      */
-    Sector_S(const Pose &p1, const Pose &p2, const PATH &p, const PART &par,
-             const double &l);
+    Sector_S(const Pose &p1, const Pose &p2, const PATH &p,const double &l);
 
-    void setSampled_route();
-    Pose getPoseAfter();
+    void setSampled_route() override;
+    Pose getPoseAfter() override;
 
 };
 

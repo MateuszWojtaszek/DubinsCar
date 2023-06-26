@@ -19,25 +19,25 @@ double mod2pi(const double &val);
  ** a function that return a difference of cosines
  * @param angle1
  * @param angle2
- * @return difference_ofCosines cos(angle1) - cos(angle2)
+ * @return differenceOfCosines cos(angle1) - cos(angle2)
  */
-double difference_ofCosines(const double &angle1, const double &angle2);
+double differenceOfCosines(const double &angle1, const double &angle2);
 
 /**
  ** a function that return a cosine of angles difference cos(alfa-beta)
  * @param angle1
  * @param angle2
- * @return  cosine_OfAngleDifference cos(angle1-angle2)
+ * @return  cosineOfAngleDifference cos(angle1-angle2)
  */
-double cosine_OfAngleDifference(const double &angle1, const double &angle2);
+double cosineOfAngleDifference(const double &angle1, const double &angle2);
 
 /**
  ** a function that return a cosine of angles Sum cos(alfa+beta)
  * @param angle1
  * @param angle2
- * @return  cosine_OfAngleSum cos(angle1+angle2)
+ * @return  cosineOfAngleSum cos(angle1+angle2)
  */
-double cosine_OfAngleSum(const double &angle1, const double &angle2);
+double cosineOfAngleSum(const double &angle1, const double &angle2);
 
 /**
  ** a function that return a distance between two Positions
@@ -45,31 +45,31 @@ double cosine_OfAngleSum(const double &angle1, const double &angle2);
  * @param p2
  * @return sqrt((p1.x-p2.x)^2+(p1.y-p2.y)^2)
  */
-double getDistance_between_pos(const Pose &p1, const Pose &p2);
+double getDistanceBetweenPos(const Pose &p1, const Pose &p2);
 
 /**
  * a function that returns a difference of sines
  * @param angle1
  * @param angle2
- * @return difference_ofSines sin(angle1) - sin(angle2)
+ * @return differenceOfSines sin(angle1) - sin(angle2)
  */
-double difference_ofSines(const double &angle1, const double &angle2);
+double differenceOfSines(const double &angle1, const double &angle2);
 
 /**
  ** a function that return a sine of angles difference sin(alfa-beta)
  * @param angle1
  * @param angle2
- * @return sine_OfAngleDifference sin(angle1-angle2)
+ * @return sineOfAngleDifference sin(angle1-angle2)
  */
-double sine_OfAngleDifference(const double &angle1, const double &angle2);
+double sineOfAngleDifference(const double &angle1, const double &angle2);
 
 /**
  ** a function that return a sine of angles Sum sin(alfa+beta)
  * @param angle1
  * @param angle2
- * @return sine_OfAngleSum sin(angle1+angle2)
+ * @return sineOfAngleSum sin(angle1+angle2)
  */
-double sine_OfAngleSum(const double &angle1, const double &angle2);
+double sineOfAngleSum(const double &angle1, const double &angle2);
 
 /**
  ** a function that return a squared value

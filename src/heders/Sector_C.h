@@ -8,11 +8,11 @@
 
 // Sector class derivative for circular motion
 class Sector_C: public Sector{
-    PATH path = NONE;
-    PART part = NOPE;
-    Pose tmpPoseC={0,0,0};
     double length = 0;
-void move(double fragment);
+void move(double fragment) override;
+void moveForLeft(double fragment);
+void moveForRight(double fragment);
+    PART part;
 
 public:
     /**
@@ -23,10 +23,10 @@ public:
      * @param par
      * @param l
      */
-Sector_C(const Pose &p1, const Pose &p2,const PATH &p, const PART &par,const double &l);
+Sector_C(const Pose &p1, const Pose &p2,const PATH &p,const PART &par,const double &l);
 
-void setSampled_route();
-Pose getPoseAfter();
+void setSampled_route() override;
+Pose getPoseAfter() override;
 };
 
 

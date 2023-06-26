@@ -4,12 +4,12 @@
 
 #include "../heders/Sector.h"
 
-Sector::Sector(const Pose &p1, const Pose &p2)
-:initial_pos(p1), final_pos(p2){
+Sector::Sector(const Pose &p1, const Pose &p2, const PATH &p)
+:initial_pos(p1), final_pos(p2), path(p){
 
 }
 
-std::vector<Pose> Sector::getSector_Sampled_route() {
+std::vector<Pose> Sector::getSector_Sampled_route() const {
     return sampled_route;
 }
 
