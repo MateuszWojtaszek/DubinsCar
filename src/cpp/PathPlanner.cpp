@@ -59,7 +59,7 @@ void PathPlanner::planPath_LSL() {
     double lengthOF_SecondL;
     lengthOF_SecondL = mod2pi(finalPose.getTheta() - arctan);
 //* * length of Path
-    double lengthOF_Path = -initPose.getTheta() + finalPose.getTheta() + lengthOF_S;
+    double lengthOF_Path = lengthOF_firstL+lengthOF_S+lengthOF_SecondL;
 //* *  Add length of specific path to the map
     addTO_Paths(lengthOF_Path, LSL);
     LenOfEachPart LofEP = {lengthOF_firstL, lengthOF_S, lengthOF_SecondL};
@@ -90,7 +90,7 @@ void PathPlanner::planPath_RSR() {
     double lengthOF_SecondR;
     lengthOF_SecondR = mod2pi(mod2pi(-finalPose.getTheta()) + arctan);
 //* * length of Path
-    double lengthOF_Path = initPose.getTheta() - finalPose.getTheta() + lengthOF_S;
+    double lengthOF_Path = lengthOF_firstR+lengthOF_S+lengthOF_SecondR;
 //* *  Add length of specific path to the map
     addTO_Paths(lengthOF_Path, RSR);
     LenOfEachPart LofEP = {lengthOF_firstR, lengthOF_S, lengthOF_SecondR};
@@ -123,7 +123,7 @@ void PathPlanner::planPath_RSL() {
     double lengthOf_L;
     lengthOf_L = mod2pi(mod2pi(finalPose.getTheta()) - arctan1 + arctan2);
 //* * length of Path
-    double lengthOF_Path = -initPose.getTheta() + finalPose.getTheta() + 2 * lengthOf_R + lengthOF_S;
+    double lengthOF_Path = lengthOf_R+lengthOF_S+lengthOf_L;
 //* *  Add length of specific path to the map
     addTO_Paths(lengthOF_Path, RSL);
     LenOfEachPart LofEP = {lengthOf_R, lengthOF_S, lengthOf_L};
@@ -157,7 +157,7 @@ void PathPlanner::planPath_LSR() {
     lengthOf_R = mod2pi(-finalPose.getTheta() + arctan1 - arctan2);
 
 //* * length of Path
-    double lengthOF_Path = initPose.getTheta() - finalPose.getTheta() + 2 * lengthOf_L + lengthOF_S;
+    double lengthOF_Path = lengthOf_L+lengthOF_S+lengthOf_R;
 //* *  Add length of specific path to the map
     addTO_Paths(lengthOF_Path, LSR);
     LenOfEachPart LofEP = {lengthOf_L, lengthOF_S, lengthOf_R}; // jak nie dziala to zamien
@@ -191,7 +191,7 @@ void PathPlanner::planPath_RLR() {
     lengthOf_R2 = mod2pi(initPose.getTheta()-finalPose.getTheta()-lengthOf_R1+lengthOf_L);
 
 //* * length of Path
-    double lengthOF_Path = initPose.getTheta() - finalPose.getTheta() + 2 * lengthOf_L;
+    double lengthOF_Path = lengthOf_R1+lengthOf_L+lengthOf_R2;
 //* *  Add length of specific path to the map
     addTO_Paths(lengthOF_Path, RLR);
     LenOfEachPart LofEP = {lengthOf_R1, lengthOf_L, lengthOf_R2}; // jak nie dziala to zamien
@@ -225,7 +225,7 @@ void PathPlanner::planPath_LRL() {
     lengthOf_L2 = mod2pi(mod2pi(finalPose.getTheta()-initPose.getTheta()-lengthOf_L1+ mod2pi(lengthOf_R)));
 
 //* * length of Path
-    double lengthOF_Path = initPose.getTheta() - finalPose.getTheta() + 2 * lengthOf_R;
+    double lengthOF_Path = lengthOf_L1+lengthOf_R+lengthOf_L2;
 //* *  Add length of specific path to the map
     addTO_Paths(lengthOF_Path, LRL);
     LenOfEachPart LofEP = {lengthOf_L1, lengthOf_R, lengthOf_L2}; // jak nie dziala to zamien
