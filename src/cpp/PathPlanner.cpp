@@ -69,8 +69,8 @@ void PathPlanner::planPath_RSR() {
     double lengthOF_firstR;
     double diffOfCos = differenceOfCosines(finalPose.getTheta(), initPose.getTheta());
     double tmp_sum = distance - sin(initPose.getTheta())+ sin(finalPose.getTheta());
-    double arctan = std::atan2(diffOfCos,tmp_sum);
-    lengthOF_firstR = mod2pi(initPose.getTheta() - arctan);
+    double arctan = mod2pi(std::atan2(diffOfCos,tmp_sum));
+    lengthOF_firstR = mod2pi(initPose.getTheta() + arctan);
 
 /**
 * * Dependencies of second part
@@ -78,13 +78,13 @@ void PathPlanner::planPath_RSR() {
     double lengthOF_S;
     double cosOfDiffAngle = cosineOfAngleDifference(initPose.getTheta(), finalPose.getTheta());
     double distSquared = squared(distance);
-    double diffOfSin = differenceOfSines(initPose.getTheta(),finalPose.getTheta());
+    double diffOfSin = differenceOfSines(finalPose.getTheta(),initPose.getTheta());
     lengthOF_S = sqrt(2 + distSquared - (2 * cosOfDiffAngle) + (2 * distance * diffOfSin));
 /**
 * * Dependencies of third part
 */
     double lengthOF_SecondR;
-    lengthOF_SecondR = mod2pi(-finalPose.getTheta() + arctan);
+    lengthOF_SecondR = mod2pi(mod2pi(-finalPose.getTheta()) + arctan);
 //* * length of Path
     double lengthOF_Path = initPose.getTheta() - finalPose.getTheta() + lengthOF_S;
 //* *  Add length of specific path to the map
@@ -219,9 +219,10 @@ void PathPlanner::setPath_RSR(const double &startX, const double &startY,const d
 }
 
 void PathPlanner::rotatePositions(double angle) {
+    initPose = {0, 0, (initPose.getTheta()-angle) * 180.0 / M_PI};
     double tmp_x2 = finalPose.getXpose() * cos(angle) + finalPose.getYpose() * sin(angle);
     double tmp_y2 = -finalPose.getXpose() * sin(angle) + finalPose.getYpose() * cos(angle);
-    finalPose = {tmp_x2,tmp_y2,finalPose.getTheta()*180.0/M_PI};
+    finalPose = {tmp_x2,tmp_y2,(finalPose.getTheta()-angle)*180.0/M_PI};
 }
 
 void PathPlanner::rotateFullPath(double angle) {
