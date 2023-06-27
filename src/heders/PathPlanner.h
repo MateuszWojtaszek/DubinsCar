@@ -53,9 +53,10 @@ class PathPlanner {
     void addTO_Paths(const double &d, const PATH &p);
 
     void planPath_LSL();
+    void setPath_LSL(const double &startX, const double &startY, const double &rotAngle);
 
     void planPath_RSR();
-
+    void setPath_RSR(const double &startX, const double &startY, const double &rotAngle);
     void planPath_RSL();
 
     void planPath_LSR();
@@ -84,7 +85,7 @@ class PathPlanner {
      ** a function that rotate full path by the angle between the start vector and the OX axis
      */
     void rotateFullPath(double angle);
-
+    void rotatePositions(double angle);
     /**
      ** a funtion that do translation to the full path -> returns to correct position
      * @param sX

@@ -23,7 +23,7 @@ PathPlanner::PathPlanner(const Pose &p_in, const Pose &p_fin) : initPose(p_in), 
 }
 
 void PathPlanner::planPaths() {
-    planPath_LSL();
+    //planPath_LSL();
     planPath_LRL();
     planPath_LSR();
     planPath_RLR();
@@ -68,8 +68,8 @@ void PathPlanner::planPath_RSR() {
 */
     double lengthOF_firstR;
     double diffOfCos = differenceOfCosines(finalPose.getTheta(), initPose.getTheta());
-    double diffOfSin = differenceOfSines(initPose.getTheta(), finalPose.getTheta());
-    double arctan = mod2pi(std::atan2(diffOfCos, distance + diffOfSin));
+    double tmp_sum = distance - sin(initPose.getTheta())+ sin(finalPose.getTheta());
+    double arctan = std::atan2(diffOfCos,tmp_sum);
     lengthOF_firstR = mod2pi(initPose.getTheta() - arctan);
 
 /**
@@ -78,12 +78,13 @@ void PathPlanner::planPath_RSR() {
     double lengthOF_S;
     double cosOfDiffAngle = cosineOfAngleDifference(initPose.getTheta(), finalPose.getTheta());
     double distSquared = squared(distance);
+    double diffOfSin = differenceOfSines(initPose.getTheta(),finalPose.getTheta());
     lengthOF_S = sqrt(2 + distSquared - (2 * cosOfDiffAngle) + (2 * distance * diffOfSin));
 /**
 * * Dependencies of third part
 */
     double lengthOF_SecondR;
-    lengthOF_SecondR = mod2pi(-finalPose.getTheta()) + arctan;
+    lengthOF_SecondR = mod2pi(-finalPose.getTheta() + arctan);
 //* * length of Path
     double lengthOF_Path = initPose.getTheta() - finalPose.getTheta() + lengthOF_S;
 //* *  Add length of specific path to the map
@@ -93,7 +94,14 @@ void PathPlanner::planPath_RSR() {
 }
 
 void PathPlanner::planPath_RSL() {
-
+/**
+* * Dependencies of first part
+*/
+//    double lengthOF_firstL;
+//    double diffOfCos = differenceOfCosines(finalPose.getTheta(), initPose.getTheta());
+//    double sumOfsines = sumOfSines(initPose.getTheta(), finalPose.getTheta());
+//    double arctan = mod2pi(std::atan2(diffOfCos, distance + diffOfSin));
+//    lengthOF_firstL = mod2pi(initPose.getTheta() - arctan);
 }
 
 void PathPlanner::planPath_LSR() {
@@ -136,53 +144,37 @@ void PathPlanner::planPathsFromOrigin() {
     double rotateAngle;
     double startX1 = initPose.getXpose();
     double startY1 = initPose.getYpose();
-    double startX2 = finalPose.getXpose();
-    double startY2 = finalPose.getYpose();
-    initPose = {0, 0, initPose.getTheta() * 180 / M_PI};
-    finalPose = {finalPose.getXpose() - startX1, finalPose.getYpose() - startY1,
-                 finalPose.getTheta() * 180 / M_PI};
+    [[maybe_unused]] double startX2 = finalPose.getXpose();
+    [[maybe_unused]] double startY2 = finalPose.getYpose();
+    initPose = {0, 0, initPose.getTheta() * 180.0 / M_PI};
+    finalPose = {finalPose.getXpose()-startX1, finalPose.getYpose()-startY1,
+                 finalPose.getTheta() * (180 / M_PI)};
     rotateAngle = mod2pi(atan2(finalPose.getYpose(), finalPose.getXpose()));
+    rotatePositions(rotateAngle);
     planPaths();
-    if(bestPath==LSL) {
-        Sector_C s1(initPose, finalPose, bestPath, L, lengthOf_eachPart.at(0));
-        s1.setSampled_route();
-        Sector_S s2(s1.getPoseAfter(), finalPose, bestPath, lengthOf_eachPart.at(1));
-        s2.setSampled_route();
-        Sector_C s3(s2.getPoseAfter(), finalPose, bestPath, L, lengthOf_eachPart.at(2));
-        s3.setSampled_route();
-        addToFullPath(&s1);
-        addToFullPath(&s2);
-        addToFullPath(&s3);
-        rotateFullPath(rotateAngle);
-        translationFullPath(startX1, startY1);
+    switch (bestPath) {
+        case RSR:setPath_RSR(startX1,startY1,rotateAngle);
+            break;
+        case RSL:
+            break;
+        case LSR:
+            break;
+        case LSL:setPath_LSL(startX1,startY1,rotateAngle);
+            break;
+        case RLR:
+            break;
+        case LRL:
+            break;
+        case NONE:
+            break;
+        default: std::cerr<<"ERROR"<<std::endl;
+            break;
     }
-    if(bestPath==RSR) {
-        Sector_C s1(initPose, finalPose, bestPath, R, lengthOf_eachPart.at(0));
-        s1.setSampled_route();
-        Sector_S s2(s1.getPoseAfter(), finalPose, bestPath, lengthOf_eachPart.at(1));
-        s2.setSampled_route();
-        Sector_C s3(s2.getPoseAfter(), finalPose, bestPath, R, lengthOf_eachPart.at(2));
-        s3.setSampled_route();
-        addToFullPath(&s1);
-        addToFullPath(&s2);
-        addToFullPath(&s3);
-        rotateFullPath(rotateAngle);
-        translationFullPath(startX1, startY1);
-    }
-
 }
 
 void PathPlanner::addToFullPath(const Sector *s) {
     for (unsigned long int val = 0; val < s->getSector_Sampled_route().size(); ++val) {
         fullPath.push_back(s->getSector_Sampled_route().at(val));
-    }
-}
-
-void PathPlanner::rotateFullPath(double angle) {
-    for (auto &val: fullPath) {
-        double tmp_x = val.getXpose() * cos(angle) - val.getYpose() * sin(angle);
-        double tmp_y = val.getXpose() * sin(angle) + val.getYpose() * cos(angle);
-        val = {tmp_x, tmp_y, val.getTheta() * 180 / M_PI}; // should be ok
     }
 }
 
@@ -194,4 +186,49 @@ void PathPlanner::translationFullPath(double sX, double sY) {
 
 std::vector<Pose> PathPlanner::getFullPath() {
     return fullPath;
+}
+
+void PathPlanner::setPath_LSL(const double &startX, const double &startY,const double  &rotAngle) {
+    Sector_C s1(initPose, finalPose, bestPath, L, lengthOf_eachPart.at(0));
+    s1.setSampled_route();
+    Sector_S s2(s1.getPoseAfter(), finalPose, bestPath, lengthOf_eachPart.at(1));
+    s2.setSampled_route();
+    Sector_C s3(s2.getPoseAfter(), finalPose, bestPath, L, lengthOf_eachPart.at(2));
+    s3.setSampled_route();
+    addToFullPath(&s1);
+    addToFullPath(&s2);
+    addToFullPath(&s3);
+    rotateFullPath(rotAngle);
+    translationFullPath(startX, startY);
+}
+
+void PathPlanner::setPath_RSR(const double &startX, const double &startY,const double  &rotAngle) {
+    Sector_C s1(initPose, finalPose, bestPath, R, lengthOf_eachPart.at(0));
+    s1.setSampled_route();
+    Sector_S s2(s1.getPoseAfter(), finalPose, bestPath, lengthOf_eachPart.at(1));
+    s2.setSampled_route();
+    Sector_C s3(s2.getPoseAfter(), finalPose, bestPath, R, lengthOf_eachPart.at(2));
+    s3.setSampled_route();
+    addToFullPath(&s1);
+    addToFullPath(&s2);
+    addToFullPath(&s3);
+    rotateFullPath(rotAngle);
+    translationFullPath(startX, startY);
+
+
+}
+
+void PathPlanner::rotatePositions(double angle) {
+    double tmp_x2 = finalPose.getXpose() * cos(angle) + finalPose.getYpose() * sin(angle);
+    double tmp_y2 = -finalPose.getXpose() * sin(angle) + finalPose.getYpose() * cos(angle);
+    finalPose = {tmp_x2,tmp_y2,finalPose.getTheta()*180.0/M_PI};
+}
+
+void PathPlanner::rotateFullPath(double angle) {
+    for (auto & val : fullPath) {
+        double tmp_x = val.getXpose() * cos(angle) - val.getYpose() * sin(angle);
+        double tmp_y = val.getXpose() * sin(angle) + val.getYpose() * cos(angle);
+        val = {tmp_x,tmp_y,val.getTheta()*180/M_PI};
+    }
+
 }

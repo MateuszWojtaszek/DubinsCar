@@ -39,7 +39,7 @@ Pose Sector_C::getPoseAfter() {
         double tmp_x = tmpPoseA.getXpose() - tmp_sin + sin(tmpPoseA.getTheta());
         double tmp_y = tmpPoseA.getYpose() + tmp_cos - cos(tmpPoseA.getTheta());
         double tmp_theta = tmpPoseA.getTheta() - length;
-        tmpPoseC = {tmp_x, tmp_y, tmp_theta * 180 / M_PI};
+        tmpPoseC = {tmp_x, tmp_y, tmp_theta * 180.0 / M_PI};
     }
     return tmpPoseC;
 }
@@ -50,7 +50,7 @@ void Sector_C::moveForLeft(double fragment) {
     double tmp_x = tmpPoseA.getXpose() + tmp_sin - sin(tmpPoseA.getTheta());
     double tmp_y = tmpPoseA.getYpose() - tmp_cos + cos(tmpPoseA.getTheta());
     double tmp_theta = tmpPoseA.getTheta() + fragment;
-    tmpPoseB = {tmp_x, tmp_y, tmp_theta*180/M_PI};
+    tmpPoseB = {tmp_x, tmp_y, tmp_theta*180.0/M_PI};
 }
 
 void Sector_C::moveForRight(double fragment) {
@@ -59,6 +59,6 @@ void Sector_C::moveForRight(double fragment) {
     double tmp_x = tmpPoseA.getXpose() - tmp_sin + sin(tmpPoseA.getTheta());
     double tmp_y = tmpPoseA.getYpose() + tmp_cos - cos(tmpPoseA.getTheta());
     double tmp_theta = tmpPoseA.getTheta() - fragment;
-    tmpPoseB = {tmp_x, tmp_y, tmp_theta*180/M_PI};
+    tmpPoseB = {tmp_x, tmp_y, tmp_theta*180.0/M_PI};
 }
 

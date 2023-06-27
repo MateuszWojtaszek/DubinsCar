@@ -14,6 +14,10 @@ double differenceOfCosines(const double &angle1, const double &angle2) {
     return cos(angle1)-cos(angle2);
 }
 
+double sumOfCosines(const double &angle1, const double &angle2){
+    return cos(angle1) + cos(angle2) ;
+}
+
 double cosineOfAngleDifference(const double &angle1, const double &angle2) {
     return cos(angle1 - angle2);
 }
@@ -30,6 +34,10 @@ double getDistanceBetweenPos(const Pose &p1, const Pose &p2) {
 
 double differenceOfSines(const double &angle1, const double &angle2) {
     return sin(angle1)-sin(angle2);
+}
+
+double sumOfSines(const double &angle1, const double &angle2){
+    return sin(angle1)+ sin(angle2);
 }
 
 double sineOfAngleDifference(const double &angle1, const double &angle2){
