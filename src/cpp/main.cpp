@@ -5,8 +5,8 @@
 
 
 int main() {
-    Pose P_init(8, 12, 270);
-    Pose P_end(14, 19, 180);
+    Pose P_init(11, 14, 123);
+    Pose P_end(17, 19, 90);
     PathPlanner planner(P_init, P_end);
     planner.planPathsFromOrigin();
     for (unsigned long val = 0; val < planner.getFullPath().size(); ++val) {
