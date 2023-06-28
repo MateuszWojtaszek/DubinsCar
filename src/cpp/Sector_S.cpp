@@ -12,10 +12,10 @@ Sector_S::Sector_S(const Pose &p1, const Pose &p2, const PATH &p,
 }
 
 void Sector_S::setSampled_route() {
-    for (double particle = 0.01; particle < length;) {
+    for (double particle = 0.5; particle < length;) {
         move(particle);
         sampled_route.push_back(tmpPoseB);
-        particle+= 0.01;
+        particle+= 0.5;
     }
 }
 

@@ -15,6 +15,7 @@
 #include "../heders/Sector_S.h"
 
 
+
 class PathPlanner {
     PATH bestPath = NONE;
     /**
@@ -38,40 +39,51 @@ class PathPlanner {
     std::map<PATH, LenOfEachPart> partsOfEachPath = {};
 
     /**
-     ** a function that add a pair to a map
+     ** function that add a pair to a map
      * @param p - path
      * @param lep - lenght of each part
      */
     void addTo_partsOfEeachPath(const PATH &p, const LenOfEachPart &lep);
 
     std::vector<double> lengthOf_eachPart = {};
-/**
- * a map for each path with it's length
- */
+    /**
+     * a map for each path with it's length
+     */
     std::map<double, PATH> Paths = {};
 
+    /**
+     * function that adds the length of the path with its name to the map
+     * @param d
+     * @param p
+     */
     void addTO_Paths(const double &d, const PATH &p);
-
+    //! path preparation functions
     void planPath_LSL();
+
     void setPath_LSL(const double &startX, const double &startY, const double &rotAngle);
 
     void planPath_RSR();
+
     void setPath_RSR(const double &startX, const double &startY, const double &rotAngle);
 
     void planPath_RSL();
+
     void setPath_RSL(const double &startX, const double &startY, const double &rotAngle);
 
     void planPath_LSR();
+
     void setPath_LSR(const double &startX, const double &startY, const double &rotAngle);
 
     void planPath_RLR();
+
     void setPath_RLR(const double &startX, const double &startY, const double &rotAngle);
 
     void planPath_LRL();
+
     void setPath_LRL(const double &startX, const double &startY, const double &rotAngle);
 
     /**
-     ** a function that iterates a map Paths and set a variable bestPath
+     ** function that iterates a map Paths and set a variable bestPath
      */
     void setBestPath();
 
@@ -81,18 +93,24 @@ class PathPlanner {
     void planPaths();
 
     /**
-     ** a function that add full sector to the fullPath vector
+     ** function that add full sector to the fullPath vector
      * @param s
      */
     void addToFullPath(const Sector *s);
 
     /**
-     ** a function that rotate full path by the angle between the start vector and the OX axis
+     ** function that rotate full path by the angle between the start vector and the OX axis
      */
     void rotateFullPath(double angle);
-    void rotatefinalPos(double angle);
+
     /**
-     ** a funtion that do translation to the full path -> returns to correct position
+     ** funtion that "prepares" a final Pos by rotating it to OX axis
+     * @param angle
+     */
+    void rotatefinalPos(double angle);
+
+    /**
+     ** funtion that do translation to the full path -> returns to correct position
      * @param sX
      * @param sY
      */

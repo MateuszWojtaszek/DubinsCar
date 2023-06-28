@@ -1,9 +1,11 @@
-cmake_minimum_required(VERSION 3.25)
+cmake_minimum_required(VERSION 3.11)
 project(Dubbins_Car)
 
 set(CMAKE_CXX_STANDARD 20)
+
 find_package(Doxygen)
 if(DOXYGEN_FOUND)
+
 
 set(SOURCE_FILES Dubbins_Car src/cpp/main.cpp src/cpp/Vector2d.cpp src/heders/Vector2d.h src/cpp/Pose.cpp src/heders/Pose.h src/cpp/Sector.cpp src/heders/Sector.h src/cpp/PathPlanner.cpp
         src/heders/PathPlanner.h src/cpp/Car.cpp src/heders/Car.h src/cpp/Sector_C.cpp src/heders/Sector_C.h src/cpp/Sector_S.cpp src/heders/Sector_S.h src/heders/MATH.h src/cpp/MATH.cpp)
@@ -31,7 +33,11 @@ endif(DOXYGEN_FOUND)
 
 include(src/cpp_warnings.cmake)
 
+find_package(SFML 2.5 COMPONENTS system window graphics network audio REQUIRED)
+include_directories(${SFML_INCLUDE_DIRS})
+
 add_executable(Dubbins_Car src/cpp/main.cpp src/cpp/Vector2d.cpp src/heders/Vector2d.h src/cpp/Pose.cpp src/heders/Pose.h src/cpp/Sector.cpp src/heders/Sector.h src/cpp/PathPlanner.cpp
-        src/heders/PathPlanner.h src/cpp/Car.cpp src/heders/Car.h src/cpp/Sector_C.cpp src/heders/Sector_C.h src/cpp/Sector_S.cpp src/heders/Sector_S.h src/heders/MATH.h src/cpp/MATH.cpp src/heders/Enums.h)
+        src/heders/PathPlanner.h src/cpp/Car.cpp src/heders/Car.h src/cpp/Sector_C.cpp src/heders/Sector_C.h src/cpp/Sector_S.cpp src/heders/Sector_S.h src/heders/MATH.h src/cpp/MATH.cpp src/heders/Enums.h src/cpp/Visualization.cpp src/heders/Visualization.h src/cpp/Visualization.cpp)
 
 target_compile_options(Dubbins_Car PRIVATE ${PROJECT_WARNING_FLAGS})
+target_link_libraries(Dubbins_Car sfml-system sfml-window sfml-graphics sfml-audio sfml-network)
