@@ -30,7 +30,7 @@ class PathPlanner {
      ** final robot position
      */
     Pose finalPose;
-
+    MODE mode;
     std::vector<Pose> fullPath = {};
 
     /**
@@ -122,7 +122,7 @@ public:
      * @param p_in - initial Pose
      * @param p_fin - final Pose
      */
-    PathPlanner(const Pose &p_in, const Pose &p_fin);
+    PathPlanner(const Pose &p_in, const Pose &p_fin, MODE m);
 
     /**
      * simple getter for best path

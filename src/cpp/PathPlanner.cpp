@@ -17,21 +17,46 @@ PATH PathPlanner::getBestPath() const {
  * @param p_in
  * @param p_fin
  */
-PathPlanner::PathPlanner(const Pose &p_in, const Pose &p_fin) : initPose(p_in), finalPose(p_fin) {
+PathPlanner::PathPlanner(const Pose &p_in, const Pose &p_fin, MODE m) : initPose(p_in), finalPose(p_fin), mode(m) {
     distance = getDistanceBetweenPos(initPose, finalPose);
-    lengthOf_eachPart.resize(3);
+    lengthOf_eachPart.reserve(3);
 }
 
 void PathPlanner::planPaths() {
-    if (distance < 4) {
-        planPath_RLR();
-        planPath_LRL();
+    switch (mode) {
 
-    } else {
-        planPath_LSL();
-        planPath_LSR();
-        planPath_RSL();
-        planPath_RSR();
+        case SHORTEST: {
+            if (distance < 4) {
+                planPath_RLR();
+                planPath_LRL();
+
+            } else {
+                planPath_LSL();
+                planPath_LSR();
+                planPath_RSL();
+                planPath_RSR();
+            }
+        }
+            break;
+        case LONGEST: {
+                planPath_LSL();
+                planPath_LSR();
+                planPath_RSL();
+                planPath_RSR();
+            }
+            break;
+        case JUST_RSR:
+            planPath_RSR();
+            break;
+        case JUST_RSL:
+            planPath_RSL();
+            break;
+        case JUST_LSR:
+            planPath_LSR();
+            break;
+        case JUST_LSL:
+            planPath_LSL();
+            break;
     }
     setBestPath();
 }
@@ -238,9 +263,16 @@ void PathPlanner::addTO_Paths(const double &d, const PATH &p) {
 
 void PathPlanner::setBestPath() {
     double tmp_best = 0;
-    for (auto path: Paths) {
-        if (tmp_best > path.first || tmp_best == 0) tmp_best = path.first;
+    if (mode==LONGEST) {
+        for (auto path: Paths) {
+            if (tmp_best < path.first || tmp_best == 0) tmp_best = path.first;
+        }
+    } else{
+        for (auto path: Paths) {
+            if (tmp_best > path.first || tmp_best == 0) tmp_best = path.first;
+        }
     }
+
     //? looking for pointer to best path
     auto path = Paths.find(tmp_best);
     bestPath = path->second;

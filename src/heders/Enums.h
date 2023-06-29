@@ -13,7 +13,20 @@ enum PATH {
     LRL,
     NONE
 };
+enum MODE{
+    SHORTEST,
+    LONGEST,
+    JUST_RSR,
+    JUST_RSL,
+    JUST_LSR,
+    JUST_LSL,
+};
 struct LenOfEachPart{
     double l1,l2,l3;
+};
+
+enum STATUS{
+    START,
+    PLANNING
 };
 #endif //DUBBINS_CAR_ENUMS_H
