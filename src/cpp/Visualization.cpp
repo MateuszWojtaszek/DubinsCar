@@ -32,8 +32,10 @@ void Visualization::drawPath(const Car &car) {
 
     for (auto val: car.getFullPath()) {
         val = scaleProbes(val);
-        probe.setPosition(static_cast<float>(val.getXpose()), static_cast<float>(val.getYpose()));
-        window.draw(probe);
+        if (isInGrid(val)) {
+            probe.setPosition(static_cast<float>(val.getXpose()), static_cast<float>(val.getYpose()));
+            window.draw(probe);
+        }
     }
 }
 
@@ -360,5 +362,12 @@ void Visualization::checkAnimateButton() {
 
 Pose Visualization::scaleProbes(Pose val) {
     return val = {val.getXpose() * 100, val.getYpose() * 100, val.getTheta() * 180 / M_PI};
+}
+
+bool Visualization::isInGrid(const Pose &p) {
+    bool x = ((p.getXpose()>480) && (p.getXpose() <1440));
+    bool y= ((p.getYpose()>200) && (p.getYpose() <943));
+    if(x & y) return true;
+    return false;
 }
 

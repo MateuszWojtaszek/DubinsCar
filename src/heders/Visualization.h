@@ -96,6 +96,8 @@ private:
 
     bool isInBox(sf::Rect<float> test);
 
+    bool isInGrid(const Pose &p);
+
 
 public:
     explicit Visualization(sf::RenderWindow &win);
