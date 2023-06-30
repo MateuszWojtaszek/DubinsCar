@@ -27,6 +27,7 @@ struct LenOfEachPart{
 
 enum STATUS{
     START,
-    PLANNING
+    PLANNING,
+    ANIMATION
 };
 #endif //DUBBINS_CAR_ENUMS_H

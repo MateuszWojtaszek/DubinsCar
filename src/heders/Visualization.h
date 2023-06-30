@@ -11,12 +11,18 @@
 
 class Visualization {
     sf::RenderWindow &window;
-    const Car &car;
-    sf::CircleShape probe{1};
+    Pose initPose{0,0,0};
+    Pose finalPose{0,0,0};
+    double initX=0,finalX=0,initY=0,finalY=0,initAngle=0,finalAngle=0;
+    sf::CircleShape probe{3}, initPoseProbe{3}, finalPoseProbe{3};
     sf::View view = {};
-    sf::Sprite background = {}, banner{},infoText{}, RSR{}, LSR{}, LSL{}, RSL{}, Longest{},signature{}, Continue{}, sideBanner{}, bottomSideBanner{}, positionInfo{}, scale{};
+    sf::Sprite background = {}, banner{},infoText{}, RSR{}, LSR{}, LSL{}, RSL{}, Longest{},signature{},
+    Continue{}, sideBanner{}, bottomSideBanner{}, positionInfo{}, scale{}, scale2{}, grid{}, zipper{}, zipper2{}, animateButton{};
+
     sf::Texture backgroundTexture{}, bannerTexture{}, infoTextTexture{}, RSRTexture{}, LSRTexture{},
-    LSLTexture{}, RSLTexture{}, LongestTexture{},signatureTexture{}, ContinueTexture{}, sideBannerTexture{}, bottomSideBannerTexture{} ,positionInfoTexture{}, scaleTexture{};
+    LSLTexture{}, RSLTexture{}, LongestTexture{},signatureTexture{}, ContinueTexture{}, sideBannerTexture{},
+    bottomSideBannerTexture{} ,positionInfoTexture{}, scaleTexture{}, gridTexture{}, zipperTexture{}, animateButtonTexture{};
+
     MODE mode = SHORTEST;
     STATUS status = START;
 
@@ -31,6 +37,16 @@ private:
     void prepareBotttomSideBanner();
 
     void prepareInfoText();
+
+    void prepareGrid();
+
+    void checkGrid();
+
+    void preparePositionProbes();
+
+    void prepareAnimateButton();
+
+    void checkAnimateButton();
 
     void prepareLSR();
 
@@ -64,14 +80,27 @@ private:
 
     void checkHighlight();
 
+    void prepareZipper();
+
+    void checkZipper(const sf::Sprite& s);
+
+    void checkZipper2(const sf::Sprite& s);
+
+    void checkFinalPoseAngle();
+
+    void checkInitPoseAngle();
+
+    void setPositions();
+
+    Pose scaleProbes(Pose val);
 
     bool isInBox(sf::Rect<float> test);
 
 
 public:
-    Visualization(sf::RenderWindow &win, const Car &c);
+    explicit Visualization(sf::RenderWindow &win);
 
-    void drawPath();
+    void drawPath(const Car &car);
 
     void drawEnvironment();
 
@@ -79,9 +108,15 @@ public:
 
     void highlight();
 
+    void animate();
+
     MODE getMode() const;
 
     STATUS getStatus() const;
+
+    Pose getInitPosition() const;
+
+    Pose getFinalPosition() const;
 
 
 };

@@ -57,6 +57,8 @@ void PathPlanner::planPaths() {
         case JUST_LSL:
             planPath_LSL();
             break;
+        default: mode = SHORTEST;
+            break;
     }
     setBestPath();
 }

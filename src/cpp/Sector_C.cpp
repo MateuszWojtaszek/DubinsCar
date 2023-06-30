@@ -17,10 +17,10 @@ void Sector_C::move(double fragment) {
 }
 
 void Sector_C::setSampled_route() {
-    for (double particle = 0.5; particle < length;) {
+    for (double particle = 0.01; particle < length;) {
         move(particle);
         sampled_route.push_back(tmpPoseB);
-        particle+= 0.5;
+        particle+= 0.01;
     }
 }
 
