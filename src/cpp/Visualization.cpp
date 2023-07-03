@@ -2,29 +2,13 @@
 // Created by mateusz on 27.06.23.
 //
 
-#include "../heders/Visualization.h"
+#include "../headers/Visualization.h"
 
 Visualization::Visualization(sf::RenderWindow &win) : window(win) {
     probe.setFillColor(sf::Color::Green);
     finalPoseProbe.setFillColor(sf::Color::Blue);
     initPoseProbe.setFillColor(sf::Color::Magenta);
-    prepareBackground();
-    prepareBanner();
-    prepareInfoText();
-    prepareLSR();
-    prepareRSR();
-    prepareLSL();
-    prepareRSL();
-    prepareLongest();
-    prepareSignature();
-    prepareContinue();
-    prepareSideBanner();
-    prepareBotttomSideBanner();
-    preparePositionInfo();
-    prepareScale();
-    prepareGrid();
-    prepareZipper();
-    prepareAnimateButton();
+    prepareEverything();
 }
 
 
@@ -369,5 +353,25 @@ bool Visualization::isInGrid(const Pose &p) {
     bool y= ((p.getYpose()>200) && (p.getYpose() <943));
     if(x & y) return true;
     return false;
+}
+
+void Visualization::prepareEverything() {
+    prepareBackground();
+    prepareBanner();
+    prepareInfoText();
+    prepareLSR();
+    prepareRSR();
+    prepareLSL();
+    prepareRSL();
+    prepareLongest();
+    prepareSignature();
+    prepareContinue();
+    prepareSideBanner();
+    prepareBotttomSideBanner();
+    preparePositionInfo();
+    prepareScale();
+    prepareGrid();
+    prepareZipper();
+    prepareAnimateButton();
 }
 

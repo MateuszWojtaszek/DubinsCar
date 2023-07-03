@@ -7,8 +7,8 @@ find_package(Doxygen)
 if(DOXYGEN_FOUND)
 
 
-set(SOURCE_FILES Dubbins_Car src/cpp/main.cpp src/cpp/Vector2d.cpp src/heders/Vector2d.h src/cpp/Pose.cpp src/heders/Pose.h src/cpp/Sector.cpp src/heders/Sector.h src/cpp/PathPlanner.cpp
-        src/heders/PathPlanner.h src/cpp/Car.cpp src/heders/Car.h src/cpp/Sector_C.cpp src/heders/Sector_C.h src/cpp/Sector_S.cpp src/heders/Sector_S.h src/heders/MATH.h src/cpp/MATH.cpp)
+set(SOURCE_FILES Dubbins_Car src/cpp/main.cpp src/cpp/Vector2d.cpp src/headers/Vector2d.h src/cpp/Pose.cpp src/headers/Pose.h src/cpp/Sector.cpp src/headers/Sector.h src/cpp/PathPlanner.cpp
+        src/headers/PathPlanner.h src/cpp/Car.cpp src/headers/Car.h src/cpp/Sector_C.cpp src/headers/Sector_C.h src/cpp/Sector_S.cpp src/headers/Sector_S.h src/headers/MATH.h src/cpp/MATH.cpp)
 set(DOXYGEN_OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile)
 
 add_custom_command(
@@ -30,14 +30,13 @@ add_custom_target(apidoc_forced
         )
 
 endif(DOXYGEN_FOUND)
-
 include(src/cpp_warnings.cmake)
 
 find_package(SFML 2.5 COMPONENTS system window graphics network audio REQUIRED)
 include_directories(${SFML_INCLUDE_DIRS})
 
-add_executable(Dubbins_Car src/cpp/main.cpp src/cpp/Vector2d.cpp src/heders/Vector2d.h src/cpp/Pose.cpp src/heders/Pose.h src/cpp/Sector.cpp src/heders/Sector.h src/cpp/PathPlanner.cpp
-        src/heders/PathPlanner.h src/cpp/Car.cpp src/heders/Car.h src/cpp/Sector_C.cpp src/heders/Sector_C.h src/cpp/Sector_S.cpp src/heders/Sector_S.h src/heders/MATH.h src/cpp/MATH.cpp src/heders/Enums.h src/cpp/Visualization.cpp src/heders/Visualization.h src/cpp/Visualization.cpp)
+add_executable(Dubbins_Car src/cpp/main.cpp src/cpp/Vector2d.cpp src/headers/Vector2d.h src/cpp/Pose.cpp src/headers/Pose.h src/cpp/Sector.cpp src/headers/Sector.h src/cpp/PathPlanner.cpp
+        src/headers/PathPlanner.h src/cpp/Car.cpp src/headers/Car.h src/cpp/Sector_C.cpp src/headers/Sector_C.h src/cpp/Sector_S.cpp src/headers/Sector_S.h src/headers/MATH.h src/cpp/MATH.cpp src/headers/Enums.h src/cpp/Visualization.cpp src/headers/Visualization.h src/cpp/Visualization.cpp)
 
 target_compile_options(Dubbins_Car PRIVATE ${PROJECT_WARNING_FLAGS})
 target_link_libraries(Dubbins_Car sfml-system sfml-window sfml-graphics sfml-audio sfml-network)

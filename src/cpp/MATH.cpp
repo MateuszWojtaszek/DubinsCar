@@ -1,7 +1,7 @@
 //
 // Created by mateusz on 22.06.23.
 //
-#include "../heders/MATH.h"
+#include "../headers/MATH.h"
 
 double mod2pi(const double &val) {
     double tmp_val = std::fmod(val, 2 * M_PI);

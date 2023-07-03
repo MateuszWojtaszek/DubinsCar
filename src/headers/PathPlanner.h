@@ -8,11 +8,11 @@
 
 #include "Pose.h"
 #include <map>
-#include "../heders/MATH.h"
+#include "MATH.h"
 #include "Enums.h"
 #include <vector>
-#include "../heders/Sector_C.h"
-#include "../heders/Sector_S.h"
+#include "Sector_C.h"
+#include "Sector_S.h"
 
 
 

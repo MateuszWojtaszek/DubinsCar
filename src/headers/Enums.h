@@ -30,4 +30,9 @@ enum STATUS{
     PLANNING,
     ANIMATION
 };
+
+enum PART {
+    L,
+    R,
+};
 #endif //DUBBINS_CAR_ENUMS_H

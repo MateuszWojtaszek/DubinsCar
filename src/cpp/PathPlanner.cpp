@@ -2,7 +2,7 @@
 // Created by mateusz on 09.06.23.
 //
 
-#include "../heders/PathPlanner.h"
+#include "../headers/PathPlanner.h"
 
 /**
  ** a function that return bestPath
@@ -62,7 +62,9 @@ void PathPlanner::planPaths() {
     }
     setBestPath();
 }
-
+//! perhaps when scheduling paths, exceptions should be thrown
+//! in case any path or part of a mathematical value comes out equal to zero or negative,
+//! which it should not do - To be added in the future?
 void PathPlanner::planPath_LSL() {
     /**
     * * Dependencies of first part

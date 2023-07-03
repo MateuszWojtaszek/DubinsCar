@@ -2,7 +2,7 @@
 // Created by mateusz on 09.06.23.
 //
 
-#include "../heders/Vector2d.h"
+#include "../headers/Vector2d.h"
 
 Vector2d Vector2d::operator!() {
     return Vector2d(-this->pos_x, -this->pos_y);

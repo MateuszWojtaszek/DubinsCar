@@ -10,16 +10,7 @@
 #include "Enums.h"
 #include "MATH.h"
 
-enum PART {
-    L,
-    L1,
-    L2,
-    R,
-    R1,
-    R2,
-    S,
-    NOPE
-};
+
 
 // base class for sectors of type Sector_C ( circle) Sector_S (straight)
 class Sector {
@@ -34,11 +25,6 @@ protected:
 public:
     virtual ~Sector() = default;
 
-    /**
-     *
-     * @param p1
-     * @param p2
-     */
     Sector(const Pose &p1, const Pose &p2, const PATH &p);
 
     [[nodiscard]] virtual std::vector<Pose> getSector_Sampled_route() const;

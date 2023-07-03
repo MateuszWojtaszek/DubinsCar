@@ -16,7 +16,8 @@ void moveForRight(double fragment);
 
 public:
     /**
-     *
+     * constructor of the Sector_c object, taking the start and end positions, respectively,
+     * and the type of path along with its length
      * @param p1
      * @param p2
      * @param p

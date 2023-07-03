@@ -2,7 +2,7 @@
 // Created by mateusz on 09.06.23.
 //
 
-#include "../heders/Sector.h"
+#include "../headers/Sector.h"
 
 Sector::Sector(const Pose &p1, const Pose &p2, const PATH &p)
 :initial_pos(p1), final_pos(p2), path(p){

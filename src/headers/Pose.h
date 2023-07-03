@@ -8,7 +8,7 @@
 #include <cmath>
 /*
  * ** class modeling robot poses and orientations (contains Vector2d, float theta <0.2pi>)
- *    Here in general there should be no inheritance but it is too late to change it
+ *    Here in general there should be no inheritance, but it is too late to change it
  */
 class Pose : public Vector2d{
     double alfa;

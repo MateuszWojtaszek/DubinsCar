@@ -11,7 +11,8 @@ class Sector_S: public Sector{
     void move(double fragment) override;
 public:
     /**
-     *
+     * constructor of the Sector_s object, taking the start and end positions, respectively,
+     * and the type of path along with its length
      * @param p1
      * @param p2
      * @param p

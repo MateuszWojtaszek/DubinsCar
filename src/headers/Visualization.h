@@ -27,7 +27,7 @@ class Visualization {
     STATUS status = START;
 
 private:
-    // maybe vector would be better
+    // maybe something else would be better
     void prepareBackground();
 
     void prepareBanner();
@@ -97,6 +97,8 @@ private:
     bool isInBox(sf::Rect<float> test);
 
     bool isInGrid(const Pose &p);
+
+    void prepareEverything();
 
 
 public:

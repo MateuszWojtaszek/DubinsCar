@@ -2,7 +2,7 @@
 // Created by mateusz on 09.06.23.
 //
 
-#include "../heders/Sector_C.h"
+#include "../headers/Sector_C.h"
 
 
 Sector_C::Sector_C(const Pose &p1, const Pose &p2, const PATH &p,const PART &par, const double &l)
